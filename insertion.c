@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node {
+typedef struct cellule {
     int val;
-    struct Node *suiv;
+    struct cellule *suiv;
 } Node;
 
 // Fonction pour insérer en tête dans une liste circulaire
-void insererTete(Node **l, int v) {
-    Node *p = malloc(sizeof(Node));
+void insererTete(cellule **l, int v) {
+    cellule *p = malloc(sizeof(cellule));
     if (p == NULL) {
         fprintf(stderr, "Erreur allocation mémoire\n");
         exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ void insererTete(Node **l, int v) {
         *l = p;
     } else {
         // Trouver le dernier élément
-        Node *tmp = *l;
+        cellule *tmp = *l;
         while (tmp->suiv != *l) {
             tmp = tmp->suiv;
         }
@@ -33,8 +33,8 @@ void insererTete(Node **l, int v) {
 }
 
 // Fonction pour insérer en queue dans une liste circulaire
-void insererQueue(Node **l, int v) {
-    Node *p = malloc(sizeof(Node));
+void insererQueue(cellule **l, int v) {
+    cellule *p = malloc(sizeof(cellule));
     if (p == NULL) {
         fprintf(stderr, "Erreur allocation mémoire\n");
         exit(EXIT_FAILURE);
@@ -46,7 +46,7 @@ void insererQueue(Node **l, int v) {
         p->suiv = p;
         *l = p;
     } else {
-        Node *tmp = *l;
+        cellule *tmp = *l;
         while (tmp->suiv != *l) {
             tmp = tmp->suiv;
         }
@@ -56,12 +56,12 @@ void insererQueue(Node **l, int v) {
 }
 
 // Fonction pour afficher la liste circulaire
-void afficher(Node *l) {
+void afficher(cellule *l) {
     if (l == NULL) {
         printf("Liste vide\n");
         return;
     }
-    Node *tmp = l;
+    cellule *tmp = l;
     do {
         printf("%d ", tmp->val);
         tmp = tmp->suiv;
@@ -70,7 +70,7 @@ void afficher(Node *l) {
 }
 
 int main() {
-    Node *l = NULL; // liste vide
+    cellule *l = NULL; // liste vide
 
     // Insertion en tête
     insererTete(&l, 10);
